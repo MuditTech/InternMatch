@@ -18,9 +18,7 @@ import {
   User,
   Sparkles,
   MessageSquare,
-  PlusCircle,
   LogOut,
-  KeyRound,
 } from "lucide-react";
 
 export function AppSidebar() {
@@ -32,8 +30,6 @@ export function AppSidebar() {
     { href: "/internships", label: "Internships", icon: Briefcase },
     { href: "/matches", label: "My Matches", icon: Sparkles },
     { href: "/messages", label: "Messages", icon: MessageSquare },
-    { href: "/internships/new", label: "Post Internship", icon: PlusCircle },
-    { href: "/apikeys", label: "API Keys", icon: KeyRound },
   ];
 
   return (
