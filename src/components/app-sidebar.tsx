@@ -20,6 +20,7 @@ import {
   MessageSquare,
   PlusCircle,
   LogOut,
+  KeyRound,
 } from "lucide-react";
 
 export function AppSidebar() {
@@ -32,6 +33,7 @@ export function AppSidebar() {
     { href: "/matches", label: "My Matches", icon: Sparkles },
     { href: "/messages", label: "Messages", icon: MessageSquare },
     { href: "/internships/new", label: "Post Internship", icon: PlusCircle },
+    { href: "/apikeys", label: "API Keys", icon: KeyRound },
   ];
 
   return (
@@ -52,7 +54,7 @@ export function AppSidebar() {
             <SidebarMenuItem key={item.href}>
               <SidebarMenuButton
                 asChild
-                isActive={pathname === item.href}
+                isActive={pathname.startsWith(item.href) && (item.href !== '/internships' || pathname === '/internships')}
                 tooltip={{ children: item.label }}
               >
                 <Link href={item.href}>
