@@ -41,7 +41,6 @@ const companyMenuItems = [
     { href: "/internships", label: "Job Profiles", icon: Briefcase },
     { href: "/matches", label: "My Matches", icon: Sparkles },
     { href: "/messages", label: "Messages", icon: MessageSquare },
-    { href: "/apikeys", label: "API Keys", icon: KeyRound },
 ];
 
 
