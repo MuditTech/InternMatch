@@ -73,7 +73,7 @@ export default function LoginPage() {
               </CardContent>
               <CardFooter>
                  <Button className="w-full" asChild>
-                  <Link href="/dashboard">Sign Up</Link>
+                  <Link href="/profile">Sign Up</Link>
                 </Button>
               </CardFooter>
             </Card>
