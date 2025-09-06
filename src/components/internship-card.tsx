@@ -1,3 +1,4 @@
+
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -44,7 +45,7 @@ export function InternshipCard({ internship, compatibility }: InternshipCardProp
       </CardContent>
       <CardFooter>
         <Button asChild className="w-full">
-          <Link href="#">View Details</Link>
+          <Link href={`/internships/${internship.id}`}>View Details</Link>
         </Button>
       </CardFooter>
     </Card>
