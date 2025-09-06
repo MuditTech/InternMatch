@@ -21,7 +21,6 @@ import {
   MessageSquare,
   LogOut,
   PlusCircle,
-  KeyRound
 } from "lucide-react";
 
 // In a real app, you'd get this from your auth context

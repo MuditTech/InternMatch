@@ -1,11 +1,11 @@
 
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { InternshipCard } from '@/components/internship-card';
-import { internships, candidateProfile } from '@/lib/data';
+import { internships } from '@/lib/data';
 import { PlusCircle, User, Star, FileText } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { Badge } from '@/components/ui/badge';
 
 
 // In a real app, you'd get this from your auth context
