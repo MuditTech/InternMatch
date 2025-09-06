@@ -41,6 +41,7 @@ export default function Home() {
                 <SelectItem value="ta">தமிழ்</SelectItem>
                 <SelectItem value="mr">मराठी</SelectItem>
                 <SelectItem value="gu">ગુજરાતી</SelectItem>
+                <SelectItem value="bn">বাংলা</SelectItem>
               </SelectContent>
             </Select>
           </nav>
