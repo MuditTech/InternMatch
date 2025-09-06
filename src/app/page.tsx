@@ -14,7 +14,7 @@ export default function Home() {
           </Link>
           <nav className="hidden md:flex gap-4">
              <Button variant="ghost" asChild>
-                <Link href="/dashboard">Dashboard</Link>
+                <Link href="/login">Dashboard</Link>
             </Button>
           </nav>
         </div>
@@ -31,10 +31,10 @@ export default function Home() {
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button asChild size="lg">
-                <Link href="/dashboard">For Candidates</Link>
+                <Link href="/login">For Candidates</Link>
               </Button>
               <Button asChild size="lg" variant="secondary">
-                <Link href="/dashboard">For Companies</Link>
+                <Link href="/login">For Companies</Link>
               </Button>
             </div>
           </div>
