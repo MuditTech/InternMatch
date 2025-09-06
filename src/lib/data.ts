@@ -130,12 +130,14 @@ export const internships: Internship[] = [
 ];
 
 export const candidateProfile = {
-  name: 'Aarav Sharma',
+  name: 'Mudit Sharma',
   headline: 'Aspiring Software Engineer',
   summary: 'A final-year Computer Science student at IIT Bombay with a passion for building scalable web applications and exploring new technologies. Proficient in JavaScript, Python, and Go, with hands-on experience in developing full-stack applications. Eager to apply my skills and learn from experienced professionals in a dynamic and challenging internship role in India.',
   skills: 'JavaScript, React, Node.js, Python, Go, SQL, MongoDB, Git, Docker, Kubernetes',
   experience: 'Developed a scalable food delivery app as a personal project using the MERN stack. Contributed to open-source projects on GitHub, focusing on backend performance optimizations.',
   preferences: 'Seeking a software engineering internship at a leading tech company in India, preferably in Mumbai or Bengaluru. Interested in roles that involve back-end development, distributed systems, and cloud-native technologies.',
+  caste: 'General',
+  familyIncome: '500000',
 };
 
 export const messages = [

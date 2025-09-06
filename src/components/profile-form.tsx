@@ -25,6 +25,8 @@ const profileSchema = z.object({
   }),
   experience: z.string(),
   preferences: z.string(),
+  caste: z.string().min(1, { message: 'Caste is required.' }),
+  familyIncome: z.string().min(1, { message: 'Family income is required.' }),
 });
 
 export function ProfileForm() {
@@ -67,6 +69,32 @@ export function ProfileForm() {
               <FormLabel>Headline</FormLabel>
               <FormControl>
                 <Input placeholder="e.g., Aspiring Software Engineer" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="caste"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Caste</FormLabel>
+              <FormControl>
+                <Input placeholder="e.g., General, OBC, SC, ST" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="familyIncome"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Family Annual Income</FormLabel>
+              <FormControl>
+                <Input placeholder="e.g., 500000" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
