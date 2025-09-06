@@ -36,8 +36,8 @@ const candidateMenuItems = [
 
 const companyMenuItems = [
     { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
-    { href: "/internships/new", label: "Post Internship", icon: PlusCircle },
-    { href: "/internships", label: "Job Profiles", icon: Briefcase },
+    { href: "/internships/new", label: "My Internship Listing", icon: PlusCircle },
+    { href: "/internships", label: "Student Profiles", icon: Briefcase },
     { href: "/matches", label: "My Matches", icon: Sparkles },
     { href: "/messages", label: "Messages", icon: MessageSquare },
 ];
