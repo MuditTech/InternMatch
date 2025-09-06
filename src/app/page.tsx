@@ -2,7 +2,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Briefcase, Users, Building } from 'lucide-react';
+import { Briefcase, Users, Building, Check, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
@@ -84,6 +84,89 @@ export default function Home() {
                   <p className="text-muted-foreground">
                     Our advanced algorithm analyzes profiles and listings to ensure the highest compatibility.
                   </p>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        <section className="py-20 lg:py-24">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold">Eligibility Criteria</h2>
+              <p className="text-muted-foreground mt-2">Please ensure you meet the following criteria before applying.</p>
+            </div>
+            <div className="grid md:grid-cols-2 gap-8">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Check className="h-6 w-6 text-green-500" />
+                    Who Can Apply
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3 text-muted-foreground">
+                    <li className="flex items-start gap-3">
+                      <Check className="h-5 w-5 text-green-500 mt-1 flex-shrink-0" />
+                      <span>Must be of Indian nationality.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <Check className="h-5 w-5 text-green-500 mt-1 flex-shrink-0" />
+                      <span>Age should be between 21 to 24 years as on the last date for application submission.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <Check className="h-5 w-5 text-green-500 mt-1 flex-shrink-0" />
+                      <span>Should not be full-time employed or engaged in full-time education.</span>
+                    </li>
+                     <li className="flex items-start gap-3">
+                      <Check className="h-5 w-5 text-green-500 mt-1 flex-shrink-0" />
+                      <span>Candidates in online/distance learning are eligible.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <Check className="h-5 w-5 text-green-500 mt-1 flex-shrink-0" />
+                      <span>Must have completed High School, Higher Secondary, ITI, Polytechnic diploma, or hold a degree (BA, B.Sc, B.Com, etc.).</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <Check className="h-5 w-5 text-green-500 mt-1 flex-shrink-0" />
+                      <span>Total family income should not exceed ₹8,00,000/- per annum.</span>
+                    </li>
+                  </ul>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <X className="h-6 w-6 text-red-500" />
+                    Who is Not Eligible
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                   <ul className="space-y-3 text-muted-foreground">
+                    <li className="flex items-start gap-3">
+                      <X className="h-5 w-5 text-red-500 mt-1 flex-shrink-0" />
+                      <span>Graduates from IITs, IIMs, National Law Universities, IISER, NIDs, and IIITs.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <X className="h-5 w-5 text-red-500 mt-1 flex-shrink-0" />
+                      <span>Those with qualifications like CA, CMA, CS, MBBS, BDS, MBA, or any master's/higher degree.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <X className="h-5 w-5 text-red-500 mt-1 flex-shrink-0" />
+                      <span>Currently undergoing any Central or State Government training/internship program.</span>
+                    </li>
+                     <li className="flex items-start gap-3">
+                      <X className="h-5 w-5 text-red-500 mt-1 flex-shrink-0" />
+                      <span>Previously completed apprenticeship under NATS or NAPS.</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <X className="h-5 w-5 text-red-500 mt-1 flex-shrink-0" />
+                      <span>Family income of any member exceeds ₹8 lakhs annually.</span>
+                    </li>
+                     <li className="flex items-start gap-3">
+                      <X className="h-5 w-5 text-red-500 mt-1 flex-shrink-0" />
+                      <span>Any family member is a permanent/regular government employee.</span>
+                    </li>
+                  </ul>
                 </CardContent>
               </Card>
             </div>
