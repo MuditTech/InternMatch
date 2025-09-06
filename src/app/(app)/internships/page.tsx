@@ -9,7 +9,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 
 
 // In a real app, you'd get this from your auth context
-const userType = "company"; 
+const userType = "candidate"; 
 
 const mockCandidates = [
     {

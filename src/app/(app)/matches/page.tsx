@@ -4,7 +4,7 @@ import { InternshipMatches } from '@/components/internship-matches';
 
 
 // In a real app, you'd get this from your auth context
-const userType = "company"; // or "candidate"
+const userType = "candidate"; // or "company"
 
 export default function MatchesPage() {
   const pageTitle = userType === 'company' ? 'Candidate Matches' : 'My Matches';

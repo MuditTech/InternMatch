@@ -24,7 +24,7 @@ import {
 } from "lucide-react";
 
 // In a real app, you'd get this from your auth context
-const userType = "company"; // or "candidate"
+const userType = "candidate"; // or "company"
 
 const candidateMenuItems = [
   { href: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
