@@ -8,7 +8,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
-import { candidateProfile } from '@/lib/data';
 
 const profileSchema = z.object({
   name: z.string().min(2, {
@@ -29,12 +28,16 @@ const profileSchema = z.object({
   familyIncome: z.string().min(1, { message: 'Family income is required.' }),
 });
 
-export function ProfileForm() {
+type ProfileFormProps = {
+  defaultValues: z.infer<typeof profileSchema>;
+};
+
+export function ProfileForm({ defaultValues }: ProfileFormProps) {
   const { toast } = useToast();
   
   const form = useForm<z.infer<typeof profileSchema>>({
     resolver: zodResolver(profileSchema),
-    defaultValues: candidateProfile,
+    defaultValues,
   });
 
   function onSubmit(values: z.infer<typeof profileSchema>) {
