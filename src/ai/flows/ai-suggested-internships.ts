@@ -22,14 +22,20 @@ const SuggestInternshipsInputSchema = z.object({
     .describe("The candidate's profile, including skills, experience, and preferences."),
   internshipList: z
     .string()
-    .describe('A list of available internships with descriptions.'),
+    .describe('A list of available internships with descriptions, each identified by a unique ID and title.'),
 });
 export type SuggestInternshipsInput = z.infer<typeof SuggestInternshipsInputSchema>;
 
+const SuggestedInternshipSchema = z.object({
+    id: z.string().describe('The unique ID of the internship.'),
+    title: z.string().describe('The title of the internship.'),
+    relevance: z.string().describe('A brief explanation of why this internship is a good match.'),
+});
+
 const SuggestInternshipsOutputSchema = z.object({
   suggestedInternships: z
-    .string()
-    .describe("A list of suggested internships that match the candidate's profile and preferences."),
+    .array(SuggestedInternshipSchema)
+    .describe("An array of the top 3 suggested internships that best match the candidate's profile and preferences."),
 });
 export type SuggestInternshipsOutput = z.infer<typeof SuggestInternshipsOutputSchema>;
 
@@ -43,14 +49,17 @@ const prompt = ai.definePrompt({
   name: 'suggestInternshipsPrompt',
   input: {schema: SuggestInternshipsInputSchema},
   output: {schema: SuggestInternshipsOutputSchema},
-  prompt: `You are an AI-powered internship matching engine.
+  prompt: `You are an expert AI career counselor specializing in internship placements.
 
-  Based on the candidate's profile and preferences, and the list of available internships, suggest the top internship matches for the candidate.
+  Your task is to analyze the candidate's profile and the provided list of internships to identify the top 3 best matches.
 
-  Candidate Profile and Preferences: {{{candidateProfile}}}
-  List of Available Internships: {{{internshipList}}}
+  Candidate Profile:
+  {{{candidateProfile}}}
 
-  Return a list of suggested internships that align with the candidate's goals.
+  Available Internships (with ID and Title):
+  {{{internshipList}}}
+
+  Please evaluate the internships against the candidate's skills, experience, and preferences. Return a JSON object containing an array of the top 3 matches, ordered from most to least relevant. For each match, provide the internship's unique ID, title, and a brief explanation of its relevance.
   `,safetySettings: [
         {
           category: 'HARM_CATEGORY_HATE_SPEECH',

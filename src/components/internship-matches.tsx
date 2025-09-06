@@ -21,21 +21,19 @@ export function InternshipMatches() {
     
     try {
       const profileString = `Name: ${candidateProfile.name}, Headline: ${candidateProfile.headline}, Summary: ${candidateProfile.summary}, Skills: ${candidateProfile.skills}, Experience: ${candidateProfile.experience}, Preferences: ${candidateProfile.preferences}`;
-      const internshipListString = internships.map(i => `Title: ${i.title}, Company: ${i.company}, Description: ${i.description}`).join('\n---\n');
+      const internshipListString = internships.map(i => `ID: ${i.id}, Title: ${i.title}, Description: ${i.description}`).join('\n---\n');
       
       const result = await suggestInternships({
         candidateProfile: profileString,
         internshipList: internshipListString,
       });
 
-      const suggestedTitles = result.suggestedInternships
-        .split('\n')
-        .map(line => line.replace(/^- /, '').trim().toLowerCase())
-        .filter(Boolean);
+      const suggestedIds = result.suggestedInternships.map(internship => internship.id);
+      
+      const foundMatches = internships
+        .filter(internship => suggestedIds.includes(internship.id))
+        .sort((a, b) => suggestedIds.indexOf(a.id) - suggestedIds.indexOf(b.id));
 
-      const foundMatches = internships.filter(internship => 
-        suggestedTitles.some(title => internship.title.toLowerCase().includes(title))
-      );
 
       setMatches(foundMatches);
 
@@ -59,9 +57,10 @@ export function InternshipMatches() {
   };
   
   // Add a random compatibility score for demonstration
-  const matchesWithCompatibility = matches.map(match => ({
+  const matchesWithCompatibility = matches.map((match, index) => ({
       ...match,
-      compatibility: Math.floor(Math.random() * (98 - 75 + 1) + 75)
+      // Assign higher compatibility to the top matches
+      compatibility: 95 - (index * 5),
   }));
 
 
@@ -95,7 +94,7 @@ export function InternshipMatches() {
         <div>
           <h2 className="text-2xl font-bold mb-4">Your Top Matches</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {matchesWithCompatibility.sort((a,b) => b.compatibility - a.compatibility).map((match) => (
+            {matchesWithCompatibility.map((match) => (
               <InternshipCard key={match.id} internship={match} compatibility={match.compatibility} />
             ))}
           </div>
