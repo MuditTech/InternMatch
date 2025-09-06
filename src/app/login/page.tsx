@@ -80,7 +80,7 @@ export default function LoginPage() {
                   </CardContent>
                   <CardFooter>
                     <Button className="w-full" asChild>
-                      <Link href="/profile?new=true">Sign Up</Link>
+                      <Link href="/profile?new=true">Create Profile & Find Internships</Link>
                     </Button>
                   </CardFooter>
                 </Card>
@@ -107,7 +107,7 @@ export default function LoginPage() {
                   </CardContent>
                   <CardFooter>
                     <Button className="w-full" asChild>
-                      <Link href="/internships/new">Create Account</Link>
+                      <Link href="/internships/new">Create Account & Post Job</Link>
                     </Button>
                   </CardFooter>
                 </Card>

@@ -20,7 +20,8 @@ import {
   Sparkles,
   MessageSquare,
   LogOut,
-  PlusCircle
+  PlusCircle,
+  KeyRound
 } from "lucide-react";
 
 // In a real app, you'd get this from your auth context
@@ -40,6 +41,7 @@ const companyMenuItems = [
     { href: "/internships", label: "Job Profiles", icon: Briefcase },
     { href: "/matches", label: "My Matches", icon: Sparkles },
     { href: "/messages", label: "Messages", icon: MessageSquare },
+    { href: "/apikeys", label: "API Keys", icon: KeyRound },
 ];
 
 

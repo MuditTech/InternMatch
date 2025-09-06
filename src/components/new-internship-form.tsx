@@ -241,6 +241,9 @@ export function NewInternshipForm() {
                     <FormControl>
                       <Input placeholder="e.g., React, Python, Data Analysis" {...field} />
                     </FormControl>
+                    <FormDescription>
+                        Enter a comma-separated list of skills.
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
@@ -254,6 +257,9 @@ export function NewInternshipForm() {
                     <FormControl>
                       <Input placeholder="e.g., B.Tech in CS, B.Com" {...field} />
                     </FormControl>
+                     <FormDescription>
+                        Enter required or preferred educational qualifications.
+                    </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
