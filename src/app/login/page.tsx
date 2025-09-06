@@ -1,4 +1,6 @@
 
+'use client';
+
 import Link from 'next/link';
 import { Briefcase } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -13,8 +15,11 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { useLanguage } from '@/components/language-provider';
 
 export default function LoginPage() {
+  const { t } = useLanguage();
+
   return (
     <div className="flex flex-col min-h-screen items-center justify-center bg-background p-4">
       <div className="w-full max-w-md">
@@ -26,28 +31,28 @@ export default function LoginPage() {
         </div>
         <Tabs defaultValue="login" className="w-full">
           <TabsList className="grid w-full grid-cols-2">
-            <TabsTrigger value="login">Login</TabsTrigger>
-            <TabsTrigger value="signup">Sign Up</TabsTrigger>
+            <TabsTrigger value="login">{t.login}</TabsTrigger>
+            <TabsTrigger value="signup">{t.signUp}</TabsTrigger>
           </TabsList>
           <TabsContent value="login">
             <Card>
               <CardHeader>
-                <CardTitle>Login</CardTitle>
-                <CardDescription>Enter your credentials to access your account.</CardDescription>
+                <CardTitle>{t.login}</CardTitle>
+                <CardDescription>{t.loginDescription}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="space-y-2">
-                  <Label htmlFor="email">Email</Label>
+                  <Label htmlFor="email">{t.email}</Label>
                   <Input id="email" type="email" placeholder="m@example.com" required />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="password">Password</Label>
+                  <Label htmlFor="password">{t.password}</Label>
                   <Input id="password" type="password" required />
                 </div>
               </CardContent>
               <CardFooter>
                 <Button className="w-full" asChild>
-                  <Link href="/dashboard">Login</Link>
+                  <Link href="/dashboard">{t.login}</Link>
                 </Button>
               </CardFooter>
             </Card>
@@ -55,32 +60,32 @@ export default function LoginPage() {
           <TabsContent value="signup">
             <Tabs defaultValue="candidate" className="w-full">
               <TabsList className="grid w-full grid-cols-2">
-                <TabsTrigger value="candidate">I'm a Candidate</TabsTrigger>
-                <TabsTrigger value="company">I'm a Company</TabsTrigger>
+                <TabsTrigger value="candidate">{t.imACandidate}</TabsTrigger>
+                <TabsTrigger value="company">{t.imACompany}</TabsTrigger>
               </TabsList>
               <TabsContent value="candidate">
                 <Card>
                   <CardHeader>
-                    <CardTitle>Candidate Sign Up</CardTitle>
-                    <CardDescription>Create an account to find your dream internship.</CardDescription>
+                    <CardTitle>{t.candidateSignUp}</CardTitle>
+                    <CardDescription>{t.candidateSignUpDescription}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="name">Name</Label>
-                      <Input id="name" placeholder="Name" required />
+                      <Label htmlFor="name">{t.name}</Label>
+                      <Input id="name" placeholder={t.namePlaceholder} required />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="email-signup">Email</Label>
+                      <Label htmlFor="email-signup">{t.email}</Label>
                       <Input id="email-signup" type="email" placeholder="m@example.com" required />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="password-signup">Password</Label>
+                      <Label htmlFor="password-signup">{t.password}</Label>
                       <Input id="password-signup" type="password" required />
                     </div>
                   </CardContent>
                   <CardFooter>
                     <Button className="w-full" asChild>
-                      <Link href="/profile?new=true">Create Profile & Find Internships</Link>
+                      <Link href="/profile?new=true">{t.createProfileAndFindInternships}</Link>
                     </Button>
                   </CardFooter>
                 </Card>
@@ -88,26 +93,26 @@ export default function LoginPage() {
               <TabsContent value="company">
                  <Card>
                   <CardHeader>
-                    <CardTitle>Company Sign Up</CardTitle>
-                    <CardDescription>Create an account to hire the best talent.</CardDescription>
+                    <CardTitle>{t.companySignUp}</CardTitle>
+                    <CardDescription>{t.companySignUpDescription}</CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div className="space-y-2">
-                      <Label htmlFor="company-name">Company Name</Label>
-                      <Input id="company-name" placeholder="Your Company" required />
+                      <Label htmlFor="company-name">{t.companyName}</Label>
+                      <Input id="company-name" placeholder={t.companyNamePlaceholder} required />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="company-email-signup">Company Email</Label>
+                      <Label htmlFor="company-email-signup">{t.companyEmail}</Label>
                       <Input id="company-email-signup" type="email" placeholder="hr@company.com" required />
                     </div>
                     <div className="space-y-2">
-                      <Label htmlFor="company-password-signup">Password</Label>
+                      <Label htmlFor="company-password-signup">{t.password}</Label>
                       <Input id="company-password-signup" type="password" required />
                     </div>
                   </CardContent>
                   <CardFooter>
                     <Button className="w-full" asChild>
-                      <Link href="/internships/new">Create Account & Post Job</Link>
+                      <Link href="/internships/new">{t.createAccountAndPostJob}</Link>
                     </Button>
                   </CardFooter>
                 </Card>

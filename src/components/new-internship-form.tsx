@@ -14,6 +14,7 @@ import { useToast } from '@/hooks/use-toast';
 import { generateInternshipListing } from '@/ai/flows/generate-internship-listing';
 import { Loader2, Sparkles } from 'lucide-react';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { useLanguage } from './language-provider';
 
 
 const formSchema = z.object({
@@ -30,6 +31,7 @@ const formSchema = z.object({
 });
 
 export function NewInternshipForm() {
+  const { t } = useLanguage();
   const [isGenerating, setIsGenerating] = useState(false);
   const { toast } = useToast();
 
@@ -52,7 +54,7 @@ export function NewInternshipForm() {
     if (roleDescription.length < 20) {
       form.setError('roleDescription', {
         type: 'manual',
-        message: 'Please provide a more detailed description (at least 20 characters).',
+        message: t.roleDescriptionValidation,
       });
       return;
     }
@@ -69,15 +71,15 @@ export function NewInternshipForm() {
       if(titleMatch) form.setValue('title', titleMatch[1]);
       
       toast({
-        title: 'Internship Draft Generated!',
-        description: 'The AI has created a draft. You can now review and edit it below.',
+        title: t.generationSuccessTitle,
+        description: t.generationSuccessDescription,
       });
     } catch (error) {
       console.error('Failed to generate internship listing:', error);
       toast({
         variant: 'destructive',
-        title: 'Generation Failed',
-        description: 'There was an error generating the internship listing. Please try again.',
+        title: t.generationFailedTitle,
+        description: t.generationFailedDescription,
       });
     } finally {
       setIsGenerating(false);
@@ -87,8 +89,8 @@ export function NewInternshipForm() {
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values)
     toast({
-        title: "Internship Posted!",
-        description: "Your internship has been successfully posted.",
+        title: t.internshipPostedTitle,
+        description: t.internshipPostedDescription,
     })
   }
 
@@ -97,9 +99,9 @@ export function NewInternshipForm() {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
         <Card>
           <CardHeader>
-            <CardTitle>Describe the Role</CardTitle>
+            <CardTitle>{t.describeTheRole}</CardTitle>
             <CardDescription>
-              Start by providing a brief description of the internship role. Our AI will use this to generate a full listing for you.
+             {t.describeTheRoleSubtitle}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -108,10 +110,10 @@ export function NewInternshipForm() {
               name="roleDescription"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Role Description</FormLabel>
+                  <FormLabel>{t.roleDescription}</FormLabel>
                   <FormControl>
                     <Textarea
-                      placeholder="e.g., A frontend developer intern to work on our new React-based design system..."
+                      placeholder={t.roleDescriptionPlaceholder}
                       {...field}
                     />
                   </FormControl>
@@ -123,12 +125,12 @@ export function NewInternshipForm() {
               {isGenerating ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                  Generating...
+                  {t.generating}...
                 </>
               ) : (
                 <>
                   <Sparkles className="mr-2 h-4 w-4" />
-                  Generate with AI
+                  {t.generateWithAI}
                 </>
               )}
             </Button>
@@ -137,9 +139,9 @@ export function NewInternshipForm() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Internship Details</CardTitle>
+            <CardTitle>{t.internshipDetails}</CardTitle>
             <CardDescription>
-              Review and edit the generated details below.
+              {t.internshipDetailsSubtitle}
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -148,9 +150,9 @@ export function NewInternshipForm() {
               name="title"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Internship Title</FormLabel>
+                  <FormLabel>{t.internshipTitle}</FormLabel>
                   <FormControl>
-                    <Input placeholder="e.g., Software Engineer Intern" {...field} />
+                    <Input placeholder={t.internshipTitlePlaceholder} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -161,9 +163,9 @@ export function NewInternshipForm() {
                 name="location"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Place of Work</FormLabel>
+                    <FormLabel>{t.placeOfWork}</FormLabel>
                     <FormControl>
-                      <Input placeholder="e.g., San Francisco, CA or Remote" {...field} />
+                      <Input placeholder={t.placeOfWorkPlaceholder} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -174,34 +176,34 @@ export function NewInternshipForm() {
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Full Description</FormLabel>
+                  <FormLabel>{t.fullDescription}</FormLabel>
                   <FormControl>
-                    <Textarea rows={10} placeholder="A detailed description of the role, company, etc." {...field} />
+                    <Textarea rows={10} placeholder={t.fullDescriptionPlaceholder} {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <h3 className="text-lg font-medium pt-4">Candidate Preferences (Optional)</h3>
+            <h3 className="text-lg font-medium pt-4">{t.candidatePreferences}</h3>
              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <FormField
                   control={form.control}
                   name="preferredCaste"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Preferred Caste</FormLabel>
+                      <FormLabel>{t.preferredCaste}</FormLabel>
                        <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select a caste" />
+                            <SelectValue placeholder={t.selectACaste} />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="general">General</SelectItem>
-                          <SelectItem value="obc">OBC</SelectItem>
-                          <SelectItem value="sc">SC</SelectItem>
-                          <SelectItem value="st">ST</SelectItem>
-                          <SelectItem value="any">Any</SelectItem>
+                          <SelectItem value="general">{t.casteOptions.general}</SelectItem>
+                          <SelectItem value="obc">{t.casteOptions.obc}</SelectItem>
+                          <SelectItem value="sc">{t.casteOptions.sc}</SelectItem>
+                          <SelectItem value="st">{t.casteOptions.st}</SelectItem>
+                          <SelectItem value="any">{t.casteOptions.any}</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -213,18 +215,18 @@ export function NewInternshipForm() {
                   name="preferredIncome"
                   render={({ field }) => (
                     <FormItem>
-                      <FormLabel>Preferred Family Income</FormLabel>
+                      <FormLabel>{t.preferredFamilyIncome}</FormLabel>
                        <Select onValueChange={field.onChange} defaultValue={field.value}>
                         <FormControl>
                           <SelectTrigger>
-                            <SelectValue placeholder="Select an income range" />
+                            <SelectValue placeholder={t.selectAnIncomeRange} />
                           </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                          <SelectItem value="<2.5L">Less than ₹2.5 Lakh</SelectItem>
-                          <SelectItem value="2.5L-8L">₹2.5 Lakh - ₹8 Lakh</SelectItem>
-                          <SelectItem value=">8L">More than ₹8 Lakh</SelectItem>
-                          <SelectItem value="any">Any</SelectItem>
+                          <SelectItem value="<2.5L">{t.incomeOptions.low}</SelectItem>
+                          <SelectItem value="2.5L-8L">{t.incomeOptions.medium}</SelectItem>
+                          <SelectItem value=">8L">{t.incomeOptions.high}</SelectItem>
+                          <SelectItem value="any">{t.incomeOptions.any}</SelectItem>
                         </SelectContent>
                       </Select>
                       <FormMessage />
@@ -237,12 +239,12 @@ export function NewInternshipForm() {
                 name="preferredSkills"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Preferred Skills</FormLabel>
+                    <FormLabel>{t.preferredSkills}</FormLabel>
                     <FormControl>
-                      <Input placeholder="e.g., React, Python, Data Analysis" {...field} />
+                      <Input placeholder={t.preferredSkillsPlaceholder} {...field} />
                     </FormControl>
                     <FormDescription>
-                        Enter a comma-separated list of skills.
+                        {t.preferredSkillsDescription}
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
@@ -253,18 +255,18 @@ export function NewInternshipForm() {
                 name="educationQualifications"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Education Qualifications</FormLabel>
+                    <FormLabel>{t.educationQualifications}</FormLabel>
                     <FormControl>
-                      <Input placeholder="e.g., B.Tech in CS, B.Com" {...field} />
+                      <Input placeholder={t.educationQualificationsPlaceholder} {...field} />
                     </FormControl>
                      <FormDescription>
-                        Enter required or preferred educational qualifications.
+                        {t.educationQualificationsDescription}
                     </FormDescription>
                     <FormMessage />
                   </FormItem>
                 )}
               />
-            <Button type="submit">Post Internship</Button>
+            <Button type="submit">{t.postInternship}</Button>
           </CardContent>
         </Card>
       </form>

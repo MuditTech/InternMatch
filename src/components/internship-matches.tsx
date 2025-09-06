@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -9,8 +10,10 @@ import { internships, candidateProfile } from '@/lib/data';
 import type { Internship } from '@/lib/types';
 import { InternshipCard } from '@/components/internship-card';
 import { useToast } from '@/hooks/use-toast';
+import { useLanguage } from './language-provider';
 
 export function InternshipMatches() {
+  const { t } = useLanguage();
   const [isLoading, setIsLoading] = useState(false);
   const [matches, setMatches] = useState<Internship[]>([]);
   const { toast } = useToast();
@@ -39,8 +42,8 @@ export function InternshipMatches() {
 
       if (foundMatches.length === 0) {
         toast({
-          title: "No matches found",
-          description: "The AI couldn't find any suitable matches. Try updating your profile.",
+          title: t.noMatchesFound,
+          description: t.noMatchesFoundSubtitle,
         });
       }
 
@@ -48,8 +51,8 @@ export function InternshipMatches() {
       console.error('Error finding matches:', error);
       toast({
         variant: "destructive",
-        title: "An error occurred",
-        description: "Failed to fetch internship matches. Please try again.",
+        title: t.errorOccurred,
+        description: t.failedToFetchMatches,
       });
     } finally {
       setIsLoading(false);
@@ -68,9 +71,9 @@ export function InternshipMatches() {
     <div className="space-y-8">
       <Card>
         <CardHeader>
-          <CardTitle>AI-Powered Matchmaking</CardTitle>
+          <CardTitle>{t.aiPoweredMatchmaking}</CardTitle>
           <CardDescription>
-            Click the button below to let our AI analyze your profile and find the best internship matches for you.
+            {t.aiPoweredMatchmakingSubtitle}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -78,12 +81,12 @@ export function InternshipMatches() {
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Finding Matches...
+                {t.findingMatches}...
               </>
             ) : (
                <>
                 <Sparkles className="mr-2 h-4 w-4" />
-                Find My Matches
+                {t.findMyMatches}
                </>
             )}
           </Button>
@@ -92,7 +95,7 @@ export function InternshipMatches() {
 
       {matches.length > 0 && (
         <div>
-          <h2 className="text-2xl font-bold mb-4">Your Top Matches</h2>
+          <h2 className="text-2xl font-bold mb-4">{t.yourTopMatches}</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {matchesWithCompatibility.map((match) => (
               <InternshipCard key={match.id} internship={match} compatibility={match.compatibility} />
@@ -103,7 +106,7 @@ export function InternshipMatches() {
 
       {isLoading && (
         <div>
-          <h2 className="text-2xl font-bold mb-4">Finding your matches...</h2>
+          <h2 className="text-2xl font-bold mb-4">{t.findingYourMatches}...</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[...Array(3)].map((_, i) => (
                 <Card key={i}>

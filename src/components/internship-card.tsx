@@ -1,3 +1,4 @@
+'use client';
 
 import Link from 'next/link';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -5,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import type { Internship } from '@/lib/types';
 import { MapPin, Building, Users } from 'lucide-react';
+import { useLanguage } from './language-provider';
 
 type InternshipCardProps = {
   internship: Internship;
@@ -12,6 +14,7 @@ type InternshipCardProps = {
 };
 
 export function InternshipCard({ internship, compatibility }: InternshipCardProps) {
+  const { t } = useLanguage();
   return (
     <Card className="flex flex-col h-full">
       <CardHeader>
@@ -19,7 +22,7 @@ export function InternshipCard({ internship, compatibility }: InternshipCardProp
             <CardTitle className="text-xl">{internship.title}</CardTitle>
             {compatibility && (
                 <Badge variant={compatibility > 80 ? "default" : "secondary"}>
-                    {compatibility}% Match
+                    {compatibility}% {t.match}
                 </Badge>
             )}
         </div>
@@ -34,7 +37,7 @@ export function InternshipCard({ internship, compatibility }: InternshipCardProp
             </div>
              <div className="flex items-center gap-2">
                 <Users className="h-4 w-4 text-muted-foreground" />
-                <span>{internship.applicants} applicants</span>
+                <span>{internship.applicants} {t.applicants}</span>
             </div>
         </CardDescription>
       </CardHeader>
@@ -45,7 +48,7 @@ export function InternshipCard({ internship, compatibility }: InternshipCardProp
       </CardContent>
       <CardFooter>
         <Button asChild className="w-full">
-          <Link href={`/internships/${internship.id}`}>View Details</Link>
+          <Link href={`/internships/${internship.id}`}>{t.viewDetails}</Link>
         </Button>
       </CardFooter>
     </Card>

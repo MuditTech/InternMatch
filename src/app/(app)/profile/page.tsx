@@ -1,21 +1,23 @@
+'use client';
+
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { ProfileForm } from '@/components/profile-form';
 import { candidateProfile } from '@/lib/data';
 import { emptyProfile } from '@/lib/empty-profile';
+import { useLanguage } from '@/components/language-provider';
+import { useSearchParams } from 'next/navigation';
 
-type ProfilePageProps = {
-  searchParams: {
-    new?: string;
-  };
-};
+type ProfilePageProps = {};
 
-export default function ProfilePage({ searchParams }: ProfilePageProps) {
-  const isNewUser = searchParams.new === 'true';
+export default function ProfilePage({}: ProfilePageProps) {
+  const { t } = useLanguage();
+  const searchParams = useSearchParams();
+  const isNewUser = searchParams.get('new') === 'true';
   const profileData = isNewUser ? emptyProfile : candidateProfile;
-  const pageTitle = isNewUser ? 'Create Your Profile' : 'My Profile';
+  const pageTitle = isNewUser ? t.createYourProfile : t.myProfile;
   const pageDescription = isNewUser 
-    ? "Fill out your profile to get started. This information will be used to match you with the best internships."
-    : "Keep your profile up-to-date to attract the best opportunities.";
+    ? t.createYourProfileSubtitle
+    : t.myProfileSubtitle;
 
 
   return (
@@ -27,8 +29,8 @@ export default function ProfilePage({ searchParams }: ProfilePageProps) {
       
       <Card>
         <CardHeader>
-            <CardTitle>Profile Details</CardTitle>
-            <CardDescription>This information will be used to match you with internships.</CardDescription>
+            <CardTitle>{t.profileDetails}</CardTitle>
+            <CardDescription>{t.profileDetailsSubtitle}</CardDescription>
         </CardHeader>
         <CardContent>
             <ProfileForm defaultValues={profileData} />

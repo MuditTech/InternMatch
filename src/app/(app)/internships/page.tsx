@@ -1,3 +1,4 @@
+'use client';
 
 
 import Link from 'next/link';
@@ -6,6 +7,7 @@ import { InternshipCard } from '@/components/internship-card';
 import { internships } from '@/lib/data';
 import { PlusCircle, User, Star, FileText } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
+import { useLanguage } from '@/components/language-provider';
 
 
 // In a real app, you'd get this from your auth context
@@ -48,6 +50,7 @@ const mockCandidates = [
 
 
 function CandidateProfileCard({ candidate }: { candidate: typeof mockCandidates[0] }) {
+    const { t } = useLanguage();
     return (
         <Card className="flex flex-col">
             <CardHeader>
@@ -57,19 +60,19 @@ function CandidateProfileCard({ candidate }: { candidate: typeof mockCandidates[
             <CardContent className="flex-grow space-y-2">
                 <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <Star className="h-4 w-4" />
-                    <span>Skills: {candidate.skills}</span>
+                    <span>{t.skills}: {candidate.skills}</span>
                 </div>
                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <User className="h-4 w-4" />
-                    <span>Caste: {candidate.caste}</span>
+                    <span>{t.caste}: {candidate.caste}</span>
                 </div>
                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <FileText className="h-4 w-4" />
-                    <span>Qualifications: {candidate.qualifications}</span>
+                    <span>{t.qualifications}: {candidate.qualifications}</span>
                 </div>
             </CardContent>
             <CardFooter>
-                <Button className="w-full">View Full Profile</Button>
+                <Button className="w-full">{t.viewFullProfile}</Button>
             </CardFooter>
         </Card>
     )
@@ -77,17 +80,18 @@ function CandidateProfileCard({ candidate }: { candidate: typeof mockCandidates[
 
 
 function CompanyJobProfiles() {
+    const { t } = useLanguage();
     return (
         <div className="space-y-8">
             <div className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-3xl font-bold">Candidate Profiles</h1>
-                    <p className="text-muted-foreground">Discover top talent for your open roles.</p>
+                    <h1 className="text-3xl font-bold">{t.candidateProfiles}</h1>
+                    <p className="text-muted-foreground">{t.candidateProfilesSubtitle}</p>
                 </div>
                 <Button asChild>
                     <Link href="/internships/new">
                         <PlusCircle className="mr-2 h-4 w-4" />
-                        Post New Job
+                        {t.postNewJob}
                     </Link>
                 </Button>
             </div>
@@ -102,12 +106,13 @@ function CompanyJobProfiles() {
 }
 
 function CandidateInternships() {
+    const { t } = useLanguage();
     return (
         <div className="space-y-8">
             <div className="flex justify-between items-center">
                 <div>
-                    <h1 className="text-3xl font-bold">Internship Listings</h1>
-                    <p className="text-muted-foreground">Browse and apply for your next opportunity.</p>
+                    <h1 className="text-3xl font-bold">{t.internshipListings}</h1>
+                    <p className="text-muted-foreground">{t.internshipListingsSubtitle}</p>
                 </div>
             </div>
             

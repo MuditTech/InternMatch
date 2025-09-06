@@ -3,19 +3,17 @@
 'use client';
 
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React from 'react';
 import { Briefcase, Users, Building, Check, X, CalendarDays, Award, Banknote, UsersRound, CircleDollarSign, Info, Download, Globe } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { translations } from '@/lib/translations';
+import { useLanguage } from '@/components/language-provider';
 
 
 export default function Home() {
-  const [language, setLanguage] = useState('en');
-  const t = translations[language];
-
+  const { language, setLanguage, t } = useLanguage();
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -29,7 +27,7 @@ export default function Home() {
              <Button variant="ghost" asChild>
                 <Link href="/login">{t.dashboard}</Link>
             </Button>
-            <Select value={language} onValueChange={setLanguage}>
+            <Select value={language} onValueChange={(value) => setLanguage(value as any)}>
               <SelectTrigger className="w-auto gap-2">
                 <Globe className="h-4 w-4" />
                 <SelectValue placeholder="Language" />
@@ -130,7 +128,7 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                   <ul className="space-y-3 text-muted-foreground">
-                    {t.eligiblePoints.map((point, index) => (
+                    {t.eligiblePoints.map((point: string, index: number) => (
                        <li key={index} className="flex items-start gap-3">
                         <Check className="h-5 w-5 text-green-500 mt-1 flex-shrink-0" />
                         <span>{point}</span>
@@ -148,7 +146,7 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                    <ul className="space-y-3 text-muted-foreground">
-                     {t.ineligiblePoints.map((point, index) => (
+                     {t.ineligiblePoints.map((point: string, index: number) => (
                         <li key={index} className="flex items-start gap-3">
                           <X className="h-5 w-5 text-red-500 mt-1 flex-shrink-0" />
                           <span>{point}</span>
@@ -174,7 +172,7 @@ export default function Home() {
                   <CardTitle className="flex items-center gap-2"><Briefcase className="text-primary"/>{t.structureTitle}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2 text-muted-foreground">
-                  {t.structurePoints.map((point, index) => <p key={index}>{point}</p>)}
+                  {t.structurePoints.map((point: string, index: number) => <p key={index}>{point}</p>)}
                 </CardContent>
               </Card>
                <Card className="lg:col-span-2">
@@ -190,7 +188,7 @@ export default function Home() {
                       </TableRow>
                     </TableHeader>
                     <TableBody>
-                      {t.stipendTable.map((row, index) => (
+                      {t.stipendTable.map((row: { benefit: string, detail: string }, index: number) => (
                         <TableRow key={index}>
                           <TableCell>{row.benefit}</TableCell>
                           <TableCell>{row.detail}</TableCell>
@@ -205,7 +203,7 @@ export default function Home() {
                    <CardTitle className="flex items-center gap-2"><UsersRound className="text-primary"/>{t.selectionTitle}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3 text-muted-foreground">
-                  {t.selectionPoints.map((point, index) => <p key={index}>{point}</p>)}
+                  {t.selectionPoints.map((point: string, index: number) => <p key={index}>{point}</p>)}
                 </CardContent>
               </Card>
               <Card>
@@ -214,7 +212,7 @@ export default function Home() {
                 </CardHeader>
                 <CardContent>
                    <ul className="space-y-2 text-muted-foreground list-disc list-inside">
-                      {t.benefitsPoints.map((point, index) => <li key={index}>{point}</li>)}
+                      {t.benefitsPoints.map((point: string, index: number) => <li key={index}>{point}</li>)}
                     </ul>
                 </CardContent>
               </Card>
@@ -223,7 +221,7 @@ export default function Home() {
                    <CardTitle className="flex items-center gap-2"><CalendarDays className="text-primary"/>{t.datesTitle}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2 text-muted-foreground">
-                  {t.datesPoints.map((point, index) => <p key={index}>{point}</p>)}
+                  {t.datesPoints.map((point: string, index: number) => <p key={index}>{point}</p>)}
                 </CardContent>
               </Card>
                <Card>
@@ -231,7 +229,7 @@ export default function Home() {
                    <CardTitle className="flex items-center gap-2"><Info className="text-primary"/>{t.additionalInfoTitle}</CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-3 text-muted-foreground">
-                   {t.additionalInfoPoints.map((point, index) => <p key={index}>{point}</p>)}
+                   {t.additionalInfoPoints.map((point: string, index: number) => <p key={index}>{point}</p>)}
                 </CardContent>
               </Card>
               <Card className="lg:col-span-3">
@@ -254,4 +252,3 @@ export default function Home() {
     </div>
   );
 }
-

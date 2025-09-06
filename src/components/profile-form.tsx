@@ -8,6 +8,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { useToast } from '@/hooks/use-toast';
+import { useLanguage } from './language-provider';
 
 const profileSchema = z.object({
   name: z.string().min(2, {
@@ -33,6 +34,7 @@ type ProfileFormProps = {
 };
 
 export function ProfileForm({ defaultValues }: ProfileFormProps) {
+  const { t } = useLanguage();
   const { toast } = useToast();
   
   const form = useForm<z.infer<typeof profileSchema>>({
@@ -43,8 +45,8 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
   function onSubmit(values: z.infer<typeof profileSchema>) {
     console.log(values);
     toast({
-      title: 'Profile Updated!',
-      description: 'Your changes have been saved successfully.',
+      title: t.profileUpdated,
+      description: t.profileUpdatedDescription,
     });
   }
 
@@ -56,9 +58,9 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
           name="name"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Full Name</FormLabel>
+              <FormLabel>{t.fullName}</FormLabel>
               <FormControl>
-                <Input placeholder="e.g., Alex Doe" {...field} />
+                <Input placeholder={t.fullNamePlaceholder} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -69,9 +71,9 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
           name="headline"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Headline</FormLabel>
+              <FormLabel>{t.headline}</FormLabel>
               <FormControl>
-                <Input placeholder="e.g., Aspiring Software Engineer" {...field} />
+                <Input placeholder={t.headlinePlaceholder} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -82,9 +84,9 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
           name="caste"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Caste</FormLabel>
+              <FormLabel>{t.caste}</FormLabel>
               <FormControl>
-                <Input placeholder="e.g., General, OBC, SC, ST" {...field} />
+                <Input placeholder={t.castePlaceholder} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -95,9 +97,9 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
           name="familyIncome"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Family Annual Income</FormLabel>
+              <FormLabel>{t.familyAnnualIncome}</FormLabel>
               <FormControl>
-                <Input placeholder="e.g., 500000" {...field} />
+                <Input placeholder={t.familyAnnualIncomePlaceholder} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -108,11 +110,11 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
           name="summary"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Professional Summary</FormLabel>
+              <FormLabel>{t.professionalSummary}</FormLabel>
               <FormControl>
                 <Textarea
                   rows={5}
-                  placeholder="Tell us a bit about yourself, your goals, and what you're passionate about."
+                  placeholder={t.professionalSummaryPlaceholder}
                   {...field}
                 />
               </FormControl>
@@ -125,10 +127,10 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
           name="skills"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Skills</FormLabel>
+              <FormLabel>{t.skills}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="e.g., JavaScript, React, Python, Figma..."
+                  placeholder={t.skillsPlaceholder}
                   {...field}
                 />
               </FormControl>
@@ -141,11 +143,11 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
           name="experience"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Experience & Projects</FormLabel>
+              <FormLabel>{t.experienceAndProjects}</FormLabel>
               <FormControl>
                 <Textarea
                   rows={5}
-                  placeholder="Describe your relevant work experience, projects, and accomplishments."
+                  placeholder={t.experienceAndProjectsPlaceholder}
                   {...field}
                 />
               </FormControl>
@@ -158,10 +160,10 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
           name="preferences"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Internship Preferences</FormLabel>
+              <FormLabel>{t.internshipPreferences}</FormLabel>
               <FormControl>
                 <Textarea
-                  placeholder="What are you looking for in an internship? (e.g., industry, company size, location)"
+                  placeholder={t.internshipPreferencesPlaceholder}
                   {...field}
                 />
               </FormControl>
@@ -169,7 +171,7 @@ export function ProfileForm({ defaultValues }: ProfileFormProps) {
             </FormItem>
           )}
         />
-        <Button type="submit">Save Changes</Button>
+        <Button type="submit">{t.saveChanges}</Button>
       </form>
     </Form>
   );

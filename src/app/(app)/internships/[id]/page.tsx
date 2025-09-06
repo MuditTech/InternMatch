@@ -1,3 +1,4 @@
+'use client'
 
 import { internships } from '@/lib/data';
 import { notFound } from 'next/navigation';
@@ -6,8 +7,10 @@ import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { MapPin, Building, Briefcase, ListChecks, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
+import { useLanguage } from '@/components/language-provider';
 
 export default function InternshipDetailsPage({ params }: { params: { id: string } }) {
+  const { t } = useLanguage();
   const internship = internships.find((i) => i.id === params.id);
 
   if (!internship) {
@@ -30,20 +33,20 @@ export default function InternshipDetailsPage({ params }: { params: { id: string
                 </div>
                  <div className="flex items-center gap-2">
                     <Briefcase className="h-4 w-4" />
-                    <span>{internship.applicants} applicants</span>
+                    <span>{internship.applicants} {t.applicants}</span>
                 </div>
             </div>
         </div>
         <div className="mt-4 md:mt-0">
              <Button asChild size="lg">
-                <Link href={`/internships/apply/success?id=${internship.id}`}>Apply Now</Link>
+                <Link href={`/internships/apply/success?id=${internship.id}`}>{t.applyNow}</Link>
             </Button>
         </div>
       </div>
 
       <Card>
         <CardHeader>
-          <CardTitle>About the Internship</CardTitle>
+          <CardTitle>{t.aboutTheInternship}</CardTitle>
         </CardHeader>
         <CardContent>
           <p className="text-muted-foreground">{internship.description}</p>
@@ -55,7 +58,7 @@ export default function InternshipDetailsPage({ params }: { params: { id: string
             <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                     <ListChecks className="h-6 w-6 text-primary" />
-                    Responsibilities
+                    {t.responsibilities}
                 </CardTitle>
             </CardHeader>
             <CardContent>
@@ -70,7 +73,7 @@ export default function InternshipDetailsPage({ params }: { params: { id: string
             <CardHeader>
                 <CardTitle className="flex items-center gap-2">
                     <CheckCircle className="h-6 w-6 text-primary" />
-                    Requirements
+                    {t.requirements}
                 </CardTitle>
             </CardHeader>
             <CardContent>

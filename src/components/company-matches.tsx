@@ -7,6 +7,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import { Loader2, Sparkles, User, Briefcase, Star } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { Badge } from './ui/badge';
+import { useLanguage } from './language-provider';
 
 // Mock data - in a real app, this would come from your backend
 const mockCandidates = [
@@ -37,6 +38,7 @@ const mockCandidates = [
 ];
 
 export function CompanyMatches() {
+  const { t } = useLanguage();
   const [isLoading, setIsLoading] = useState(false);
   const [matches, setMatches] = useState<typeof mockCandidates>([]);
   const { toast } = useToast();
@@ -51,16 +53,16 @@ export function CompanyMatches() {
             setMatches(mockCandidates);
             if (mockCandidates.length === 0) {
                 toast({
-                title: "No matches found",
-                description: "The AI couldn't find any suitable candidates yet.",
+                title: t.noMatchesFound,
+                description: t.noCandidatesFound,
                 });
             }
         } catch (error) {
             console.error('Error finding matches:', error);
             toast({
                 variant: "destructive",
-                title: "An error occurred",
-                description: "Failed to fetch candidate matches. Please try again.",
+                title: t.errorOccurred,
+                description: t.failedToFetchCandidates,
             });
         } finally {
             setIsLoading(false);
@@ -72,9 +74,9 @@ export function CompanyMatches() {
     <div className="space-y-8">
       <Card>
         <CardHeader>
-          <CardTitle>AI-Powered Candidate Matching</CardTitle>
+          <CardTitle>{t.aiPoweredCandidateMatching}</CardTitle>
           <CardDescription>
-            Click the button to let our AI find the best candidates for your open positions.
+            {t.aiPoweredCandidateMatchingSubtitle}
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -82,12 +84,12 @@ export function CompanyMatches() {
             {isLoading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                Finding Candidates...
+                {t.findingCandidates}...
               </>
             ) : (
                <>
                 <Sparkles className="mr-2 h-4 w-4" />
-                Find Candidate Matches
+                {t.findCandidateMatches}
                </>
             )}
           </Button>
@@ -96,29 +98,29 @@ export function CompanyMatches() {
 
       {matches.length > 0 && (
         <div>
-          <h2 className="text-2xl font-bold mb-4">Your Top Candidates</h2>
+          <h2 className="text-2xl font-bold mb-4">{t.yourTopCandidates}</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {matches.map((candidate) => (
               <Card key={candidate.id} className="flex flex-col">
                 <CardHeader>
                    <div className="flex justify-between items-start">
                      <CardTitle>{candidate.name}</CardTitle>
-                     <Badge>{candidate.matchPercentage}% Match</Badge>
+                     <Badge>{candidate.matchPercentage}% {t.match}</Badge>
                    </div>
                    <CardDescription>{candidate.headline}</CardDescription>
                 </CardHeader>
                 <CardContent className="flex-grow space-y-2">
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Briefcase className="h-4 w-4" />
-                        <span>Matched for: {candidate.matchedJob}</span>
+                        <span>{t.matchedFor}: {candidate.matchedJob}</span>
                     </div>
                     <div className="flex items-center gap-2 text-sm text-muted-foreground">
                         <Star className="h-4 w-4" />
-                        <span>Skills: {candidate.skills}</span>
+                        <span>{t.skills}: {candidate.skills}</span>
                     </div>
                 </CardContent>
                 <CardFooter>
-                    <Button className="w-full">View Profile</Button>
+                    <Button className="w-full">{t.viewProfile}</Button>
                 </CardFooter>
               </Card>
             ))}
@@ -128,7 +130,7 @@ export function CompanyMatches() {
 
       {isLoading && (
          <div>
-          <h2 className="text-2xl font-bold mb-4">Finding candidates...</h2>
+          <h2 className="text-2xl font-bold mb-4">{t.findingCandidates}...</h2>
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
             {[...Array(3)].map((_, i) => (
                 <Card key={i}>

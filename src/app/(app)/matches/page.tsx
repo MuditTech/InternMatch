@@ -1,16 +1,19 @@
+'use client';
 
 import { CompanyMatches } from '@/components/company-matches';
 import { InternshipMatches } from '@/components/internship-matches';
+import { useLanguage } from '@/components/language-provider';
 
 
 // In a real app, you'd get this from your auth context
 const userType = "candidate"; // or "company"
 
 export default function MatchesPage() {
-  const pageTitle = userType === 'company' ? 'Candidate Matches' : 'My Matches';
+  const { t } = useLanguage();
+  const pageTitle = userType === 'company' ? t.candidateMatches : t.myMatches;
   const pageDescription = userType === 'company' 
-    ? "Review candidates that our AI has matched to your job profiles."
-    : "Discover internships perfectly tailored to your skills and preferences.";
+    ? t.candidateMatchesSubtitle
+    : t.myMatchesSubtitle;
 
   return (
     <div className="space-y-8">

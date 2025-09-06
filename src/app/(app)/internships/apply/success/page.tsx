@@ -7,8 +7,10 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { CheckCircle2 } from 'lucide-react';
 import { internships } from '@/lib/data';
+import { useLanguage } from '@/components/language-provider';
 
 export default function ApplicationSuccessPage() {
+  const { t } = useLanguage();
   const searchParams = useSearchParams();
   const internshipId = searchParams.get('id');
   const internship = internships.find((i) => i.id === internshipId);
@@ -20,26 +22,23 @@ export default function ApplicationSuccessPage() {
           <div className="mx-auto bg-green-100 dark:bg-green-900 rounded-full p-3 w-fit mb-4">
              <CheckCircle2 className="h-10 w-10 text-green-600 dark:text-green-400" />
           </div>
-          <CardTitle className="text-3xl">Application Successful!</CardTitle>
+          <CardTitle className="text-3xl">{t.applicationSuccessful}</CardTitle>
           {internship && (
             <CardDescription className="pt-2">
-              You have successfully applied for the
-              <span className="font-semibold text-foreground"> {internship.title} </span>
-              position at
-              <span className="font-semibold text-foreground"> {internship.company}</span>.
+              {t.applicationSuccessMessage.replace('{title}', internship.title).replace('{company}', internship.company)}
             </CardDescription>
           )}
         </CardHeader>
         <CardContent className="space-y-4">
           <p className="text-muted-foreground">
-            The company will review your profile and get back to you if you are a good fit. You can check the status of your applications in the messages tab.
+            {t.applicationSuccessNextSteps}
           </p>
           <div className="flex justify-center gap-4">
             <Button asChild>
-              <Link href="/internships">Keep Browsing</Link>
+              <Link href="/internships">{t.keepBrowsing}</Link>
             </Button>
             <Button asChild variant="outline">
-              <Link href="/dashboard">Go to Dashboard</Link>
+              <Link href="/dashboard">{t.goToDashboard}</Link>
             </Button>
           </div>
         </CardContent>

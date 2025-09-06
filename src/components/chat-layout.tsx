@@ -12,8 +12,10 @@ import { Button } from '@/components/ui/button';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { messages as mockMessages } from '@/lib/data';
 import { Send } from 'lucide-react';
+import { useLanguage } from './language-provider';
 
 export function ChatLayout() {
+  const { t } = useLanguage();
   const [messages, setMessages] = useState(mockMessages);
   const [selectedChat, setSelectedChat] = useState(messages[0]);
 
@@ -22,7 +24,7 @@ export function ChatLayout() {
       <CardContent className="p-0 grid grid-cols-1 md:grid-cols-3 h-full">
         <div className="flex flex-col border-r">
           <div className="p-4 border-b">
-            <h2 className="text-xl font-semibold">Conversations</h2>
+            <h2 className="text-xl font-semibold">{t.conversations}</h2>
           </div>
           <ScrollArea className="flex-grow">
             {messages.map((chat) => (
@@ -62,7 +64,7 @@ export function ChatLayout() {
                 </Avatar>
                 <div>
                     <h3 className="text-lg font-semibold">{selectedChat.company}</h3>
-                    <p className="text-sm text-muted-foreground">with {selectedChat.contactName}</p>
+                    <p className="text-sm text-muted-foreground">{t.with} {selectedChat.contactName}</p>
                 </div>
               </div>
               <ScrollArea className="flex-grow p-4">
@@ -91,7 +93,7 @@ export function ChatLayout() {
               <div className="p-4 border-t">
                 <div className="relative">
                   <Input
-                    placeholder="Type a message..."
+                    placeholder={t.typeAMessage}
                     className="pr-12"
                   />
                   <Button
@@ -106,7 +108,7 @@ export function ChatLayout() {
             </>
           ) : (
             <div className="flex items-center justify-center h-full text-muted-foreground">
-              <p>Select a conversation to start chatting</p>
+              <p>{t.selectAConversation}</p>
             </div>
           )}
         </div>
