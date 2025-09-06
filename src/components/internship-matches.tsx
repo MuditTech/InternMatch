@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Loader2, Sparkles } from 'lucide-react';
 import { suggestInternships } from '@/ai/flows/ai-suggested-internships';
 import { internships, candidateProfile } from '@/lib/data';
