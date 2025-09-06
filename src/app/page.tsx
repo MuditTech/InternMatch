@@ -2,9 +2,11 @@
 'use client';
 
 import Link from 'next/link';
-import { Briefcase, Users, Building, Check, X } from 'lucide-react';
+import { Briefcase, Users, Building, Check, X, CalendarDays, Award, Banknote, UsersRound, CircleDollarSign, Info, Download } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+
 
 export default function Home() {
 
@@ -167,6 +169,114 @@ export default function Home() {
                       <span>Any family member is a permanent/regular government employee.</span>
                     </li>
                   </ul>
+                </CardContent>
+              </Card>
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-muted py-20 lg:py-24">
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+            <div className="text-center">
+              <h2 className="text-3xl md:text-4xl font-bold">Program Details</h2>
+              <p className="text-muted-foreground mt-2">Everything you need to know about the internship program.</p>
+            </div>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2"><Briefcase className="text-primary"/>Internship Structure</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2 text-muted-foreground">
+                  <p><strong>Duration:</strong> 12 months (including 6 months of hands-on training).</p>
+                  <p><strong>Sectors:</strong> Banking, Oil & Gas, Hospitality, Automotive, Manufacturing, FMCG, Travel, Energy, and more.</p>
+                  <p><strong>Companies:</strong> Reliance, TCS, HDFC Bank, Maruti Suzuki, ITC, HUL, The Times Group, and 500+ others.</p>
+                </CardContent>
+              </Card>
+               <Card className="lg:col-span-2">
+                <CardHeader>
+                   <CardTitle className="flex items-center gap-2"><CircleDollarSign className="text-primary"/>Stipend & Financial Benefits</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Benefit</TableHead>
+                        <TableHead>Amount/Detail</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      <TableRow>
+                        <TableCell>Monthly Stipend</TableCell>
+                        <TableCell>₹5,000 (₹4,500 from Govt, ₹500 from company)</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>One-time Grant</TableCell>
+                        <TableCell>₹6,000 upon commencement (via DBT)</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Insurance Coverage</TableCell>
+                        <TableCell>PMJJBY and PMSBY</TableCell>
+                      </TableRow>
+                      <TableRow>
+                        <TableCell>Certificate</TableCell>
+                        <TableCell>Government-certified upon completion</TableCell>
+                      </TableRow>
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
+               <Card>
+                <CardHeader>
+                   <CardTitle className="flex items-center gap-2"><UsersRound className="text-primary"/>Selection Process</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3 text-muted-foreground">
+                  <p><strong>Screening:</strong> Based on academic background, SOP, and preferences.</p>
+                  <p><strong>Interview:</strong> Some roles may require a short virtual interview.</p>
+                  <p><strong>Diversity & Inclusion:</strong> Emphasis on diversity, especially for candidates from rural/aspirational districts and reserved categories.</p>
+                </CardContent>
+              </Card>
+              <Card>
+                <CardHeader>
+                   <CardTitle className="flex items-center gap-2"><Award className="text-primary"/>Key Benefits</CardTitle>
+                </CardHeader>
+                <CardContent>
+                   <ul className="space-y-2 text-muted-foreground list-disc list-inside">
+                      <li>Real-world industry exposure</li>
+                      <li>Skill development and mentorship</li>
+                      <li>Networking opportunities</li>
+                      <li>Enhanced resume value</li>
+                      <li>Financial support</li>
+                    </ul>
+                </CardContent>
+              </Card>
+               <Card>
+                <CardHeader>
+                   <CardTitle className="flex items-center gap-2"><CalendarDays className="text-primary"/>Important Dates (2025)</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-2 text-muted-foreground">
+                  <p><strong>Phase 2 Application Deadline:</strong> April 22, 2025</p>
+                  <p><strong>Selection Process:</strong> Ongoing (check portal for updates)</p>
+                  <p><strong>Internship Commencement:</strong> As per company schedule</p>
+                </CardContent>
+              </Card>
+               <Card>
+                <CardHeader>
+                   <CardTitle className="flex items-center gap-2"><Info className="text-primary"/>Additional Information</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-3 text-muted-foreground">
+                   <p><strong>No Application Fee:</strong> The scheme is free to apply.</p>
+                  <p><strong>Affirmative Action:</strong> Special consideration for candidates from rural/aspirational districts and underrepresented communities.</p>
+                  <p><strong>Performance Evaluation:</strong> Transparent process with feedback for interns.</p>
+                </CardContent>
+              </Card>
+              <Card className="lg:col-span-3">
+                 <CardHeader>
+                   <CardTitle className="flex items-center gap-2"><Download className="text-primary"/>How to Stay Updated</CardTitle>
+                </CardHeader>
+                <CardContent className="flex flex-col sm:flex-row gap-4 items-center text-center sm:text-left">
+                   <p className="text-muted-foreground flex-grow">Download the PMIS App for real-time notifications. Regularly check the official portal and registered email/SMS for updates.</p>
+                   <Button>Download App</Button>
                 </CardContent>
               </Card>
             </div>
