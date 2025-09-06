@@ -5,11 +5,8 @@ import Link from 'next/link';
 import { Briefcase, Users, Building } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { useLanguage } from '@/context/language-context';
-import { LanguageSwitcher } from '@/components/language-switcher';
 
 export default function Home() {
-  const { t } = useLanguage();
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -21,9 +18,8 @@ export default function Home() {
           </Link>
           <nav className="hidden md:flex gap-4 items-center">
              <Button variant="ghost" asChild>
-                <Link href="/login">{t('dashboard')}</Link>
+                <Link href="/login">Dashboard</Link>
             </Button>
-            <LanguageSwitcher />
           </nav>
         </div>
       </header>
@@ -32,17 +28,17 @@ export default function Home() {
         <section className="text-center py-20 lg:py-32">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tighter mb-4 font-headline">
-              {t('heroTitle')}
+              Find Your Perfect Internship with AI
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground max-w-3xl mx-auto mb-8">
-              {t('heroSubtitle')}
+              Our AI-powered platform connects talented students with innovative companies for the perfect internship match.
             </p>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Button asChild size="lg">
-                <Link href="/login">{t('forCandidates')}</Link>
+                <Link href="/login">For Candidates</Link>
               </Button>
               <Button asChild size="lg" variant="secondary">
-                <Link href="/login">{t('forCompanies')}</Link>
+                <Link href="/login">For Companies</Link>
               </Button>
             </div>
           </div>
@@ -56,11 +52,11 @@ export default function Home() {
                   <div className="mx-auto bg-primary/10 rounded-full p-3 w-fit">
                     <Users className="h-8 w-8 text-primary" />
                   </div>
-                  <CardTitle>{t('candidatesCardTitle')}</CardTitle>
+                  <CardTitle>For Candidates</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    {t('candidatesCardDescription')}
+                    Create your profile, showcase your skills, and let our AI find the best internship opportunities for you.
                   </p>
                 </CardContent>
               </Card>
@@ -69,11 +65,11 @@ export default function Home() {
                   <div className="mx-auto bg-primary/10 rounded-full p-3 w-fit">
                     <Building className="h-8 w-8 text-primary" />
                   </div>
-                  <CardTitle>{t('companiesCardTitle')}</CardTitle>
+                  <CardTitle>For Companies</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    {t('companiesCardDescription')}
+                    Post your internship listings and get matched with the most qualified and motivated candidates.
                   </p>
                 </CardContent>
               </Card>
@@ -82,11 +78,11 @@ export default function Home() {
                   <div className="mx-auto bg-primary/10 rounded-full p-3 w-fit">
                     <Briefcase className="h-8 w-8 text-primary" />
                   </div>
-                  <CardTitle>{t('matchingCardTitle')}</CardTitle>
+                  <CardTitle>Intelligent Matching</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-muted-foreground">
-                    {t('matchingCardDescription')}
+                    Our advanced algorithm analyzes profiles and listings to ensure the highest compatibility.
                   </p>
                 </CardContent>
               </Card>
@@ -96,7 +92,7 @@ export default function Home() {
       </main>
 
       <footer className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 text-center text-muted-foreground">
-        <p>&copy; {new Date().getFullYear()} InternMatch AI. {t('footerRights')}</p>
+        <p>&copy; {new Date().getFullYear()} InternMatch AI. All rights reserved.</p>
       </footer>
     </div>
   );

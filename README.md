@@ -12,16 +12,10 @@ This is a Next.js application built in Firebase Studio that uses AI to match int
     ```
     GEMINI_API_KEY="YOUR_API_KEY_HERE"
     ```
-3.  **Run the development servers**: You'll need two terminals for this.
-    
-    *   In the first terminal, start the Genkit AI service:
-        ```bash
-        npm run genkit:watch
-        ```
-    *   In the second terminal, start the Next.js application:
-        ```bash
-        npm run dev
-        ```
+3.  **Run the development server**: This single command will start both the AI service and the Next.js application.
+    ```bash
+    npm run dev
+    ```
 
 4.  **Open the application**: You can now access the site at [http://localhost:9002](http://localhost:9002).
 
