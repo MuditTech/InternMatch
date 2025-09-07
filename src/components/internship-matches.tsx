@@ -4,8 +4,9 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { Loader2, Sparkles } from 'lucide-react';
+import { Loader2, Sparkles, Lightbulb } from 'lucide-react';
 import { suggestInternships } from '@/ai/flows/ai-suggested-internships';
+import { suggestProfileImprovements } from '@/ai/flows/suggest-profile-improvements';
 import { internships, candidateProfile } from '@/lib/data';
 import type { Internship } from '@/lib/types';
 import { InternshipCard } from '@/components/internship-card';
@@ -16,22 +17,29 @@ export function InternshipMatches() {
   const { t } = useLanguage();
   const [isLoading, setIsLoading] = useState(false);
   const [matches, setMatches] = useState<Internship[]>([]);
+  const [improvements, setImprovements] = useState<string[]>([]);
   const { toast } = useToast();
 
   const handleFindMatches = async () => {
     setIsLoading(true);
     setMatches([]);
+    setImprovements([]);
     
     try {
       const profileString = `Name: ${candidateProfile.name}, Headline: ${candidateProfile.headline}, Summary: ${candidateProfile.summary}, Skills: ${candidateProfile.skills}, Experience: ${candidateProfile.experience}, Preferences: ${candidateProfile.preferences}`;
       const internshipListString = internships.map(i => `ID: ${i.id}, Title: ${i.title}, Description: ${i.description}`).join('\n---\n');
       
-      const result = await suggestInternships({
-        candidateProfile: profileString,
-        internshipList: internshipListString,
-      });
+      const [internshipResult, improvementResult] = await Promise.all([
+        suggestInternships({
+          candidateProfile: profileString,
+          internshipList: internshipListString,
+        }),
+        suggestProfileImprovements({
+            candidateProfile: profileString
+        })
+      ]);
 
-      const suggestedIds = result.suggestedInternships.map(internship => internship.id);
+      const suggestedIds = internshipResult.suggestedInternships.map(internship => internship.id);
       
       const foundMatches = internships
         .filter(internship => suggestedIds.includes(internship.id))
@@ -39,6 +47,7 @@ export function InternshipMatches() {
 
 
       setMatches(foundMatches);
+      setImprovements(improvementResult.improvements);
 
       if (foundMatches.length === 0) {
         toast({
@@ -94,13 +103,37 @@ export function InternshipMatches() {
       </Card>
 
       {matches.length > 0 && (
-        <div>
-          <h2 className="text-2xl font-bold mb-4">{t.yourTopMatches}</h2>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {matchesWithCompatibility.map((match) => (
-              <InternshipCard key={match.id} internship={match} compatibility={match.compatibility} />
-            ))}
+        <div className="space-y-8">
+          <div>
+            <h2 className="text-2xl font-bold mb-4">{t.yourTopMatches}</h2>
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {matchesWithCompatibility.map((match) => (
+                <InternshipCard key={match.id} internship={match} compatibility={match.compatibility} />
+              ))}
+            </div>
           </div>
+          
+          {improvements.length > 0 && (
+             <Card>
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-2">
+                    <Lightbulb className="h-6 w-6 text-primary" />
+                    Profile Recommendations
+                  </CardTitle>
+                  <CardDescription>
+                    Our AI suggests the following improvements to your profile to get better matches:
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <ul className="space-y-3 text-muted-foreground list-disc pl-5">
+                      {improvements.map((item, index) => (
+                          <li key={index}>{item}</li>
+                      ))}
+                  </ul>
+                </CardContent>
+              </Card>
+          )}
+
         </div>
       )}
 
